@@ -73,7 +73,7 @@ public class ControleProfessor {
 			return;
 		}
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Professor gravado com sucesso!", "");
+				"Professor Gravado com Sucesso! *-*", "");
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
 	}
 

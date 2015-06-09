@@ -9,59 +9,61 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.unibh.escola.entidades.Disciplina;
-import br.unibh.escola.entidades.Professor;
+import br.unibh.escola.entidades.Sala;
 
 @Stateless
 @LocalBean
-public class ServicoProfessor implements DAO<Professor, Long> {
+
+public class ServicoSala implements DAO<Sala, Long> {
+	
 	@Inject
 	EntityManager em;
 	@Inject
 	private Logger log;
-
+	
 	@Override
-	public Professor insert(Professor t) throws Exception {
+	public Sala insert(Sala t) throws Exception {
 		log.info("Persistindo " + t);
 		em.persist(t);
 		return t;
 	}
 
 	@Override
-	public Professor update(Professor t) throws Exception {
+	public Sala update(Sala t) throws Exception {
 		log.info("Atualizando " + t);
 		return em.merge(t);
 	}
 
 	@Override
-	public void delete(Professor t) throws Exception {
+	public void delete(Sala t) throws Exception {
 		log.info("Removendo " + t);
 		Object c = em.merge(t);
 		em.remove(c);
 	}
 
 	@Override
-	public Professor find(Long k) throws Exception {
-		log.info("Encontrando Professor " + k);
-		return em.find(Professor.class, k);
+	public Sala find(Long k) throws Exception {
+		log.info("Encontrando Sala " + k);
+		return em.find(Sala.class, k);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Sala> findAll() throws Exception {
+		log.info("Encontrando todas as salas");
+		return em.createQuery("from Sala").getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Professor> findAll() throws Exception {
-		log.info("Encontrando todos os Professors");
-		return em.createQuery("from Professor").getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Professor> findByName(String name) throws Exception {
-		log.info("Encontrando Professors " + name);
-		return em.createNamedQuery("Professor.findByName")
-				.setParameter("nome", name + "%").getResultList();
+	public List<Sala> findByCapacidade(int capacidade) throws Exception {
+		log.info("Encontrando as salas " + capacidade);
+		return em.createNamedQuery("Sala.findByCapacidade")
+				.setParameter("capacidade", capacidade).getResultList();
 	}
 	
 	@Override
-	public List<Professor> findByCapacidade(int capacidade) throws Exception {
+	public List<Sala> findByName(String nome) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

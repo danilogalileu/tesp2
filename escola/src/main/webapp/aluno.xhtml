@@ -11,7 +11,7 @@
 			<h:form id="cad" rendered="#{not empty alunomb.aluno}">
 				<rich:panel>
 					<h:outputText value="Cadastro de Alunos"
-						style="font-size:15px;font- weight:bold" />
+						style="font-size:15px;font-weight:bold" />
 					<rich:messages />
 					<h:panelGrid columns="3">
 						<h:outputLabel value="Nome " />
@@ -49,7 +49,7 @@
 					render="cadastro" />
 			</h:form>
 			<h:panelGroup rendered="#{empty alunomb.alunoes}">
-				<h:outputText value="Nenhum aluno existe" />
+				<h:outputText value="Nenhum Aluno Encontrado! :(" />
 			</h:panelGroup>
 			<h:form id="edt">
 				<rich:dataTable id="tabela" var="aluno" value="#{alunomb.alunoes}"

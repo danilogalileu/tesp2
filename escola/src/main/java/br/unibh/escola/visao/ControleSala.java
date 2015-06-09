@@ -1,37 +1,40 @@
 package br.unibh.escola.visao;
+
 import java.util.List;
 import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import br.unibh.escola.entidades.Aluno;
-import br.unibh.escola.negocio.ServicoAluno;
 
-@ManagedBean(name = "alunomb")
+import br.unibh.escola.entidades.Sala;
+import br.unibh.escola.negocio.ServicoSala;
+
+@ManagedBean(name = "salamb")
 @ViewScoped
-public class ControleAluno {
+public class ControleSala {
 	@Inject
 	private Logger log;
 	@Inject
-	private ServicoAluno sa;
-	private Aluno aluno;
-	private String nomeArg;
+	private ServicoSala sa;
+	private Sala sala;
+	private String capacidadeArg;
 	private Long id;
-	private List<Aluno> alunoes;
+	private List<Sala> salas;
 
-	public Aluno getAluno() {
-		return aluno;
+	public Sala getSala() {
+		return sala;
 	}
 
-	public String getNomeArg() {
-		return nomeArg;
+	public String getCapacidadeArg() {
+		return capacidadeArg;
 	}
 
-	public void setNomeArg(String nomeArg) {
-		this.nomeArg = nomeArg;
+	public void setCapacidadeArg(String capacidadeArg) {
+		this.capacidadeArg = capacidadeArg;
 	}
 
 	public Long getId() {
@@ -42,15 +45,15 @@ public class ControleAluno {
 		this.id = id;
 	}
 
-	public List<Aluno> getAlunoes() {
-		return alunoes;
+	public List<Sala> getSalas() {
+		return salas;
 	}
 
 	@PostConstruct
 	public void inicializaLista() {
-		log.info("Executando o MB de Aluno");
+		log.info("Executando o MB de Sala");
 		try {
-			alunoes = sa.findAll();
+			salas = sa.findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,10 +62,10 @@ public class ControleAluno {
 	public void gravar() {
 		FacesMessage facesMsg;
 		try {
-			if (aluno.getId() == null) {
-				aluno = sa.insert(aluno);
+			if (sala.getId() == null) {
+				sala = sa.insert(sala);
 			} else {
-				aluno = sa.update(aluno);
+				sala = sa.update(sala);
 			}
 		} catch (Exception e) {
 			facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: "
@@ -72,34 +75,34 @@ public class ControleAluno {
 			return;
 		}
 		facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Aluno Gravado com Sucesso! *-*", "");
+				"Sala Gravada com Sucesso! *-*", "");
 		FacesContext.getCurrentInstance().addMessage("messagePanel", facesMsg);
 	}
 
 	public void pesquisar() {
 		try {
-			alunoes = sa.findByName(nomeArg);
+			salas = sa.findByCapacidade(Integer.parseInt(capacidadeArg));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void novo() {
-		aluno = new Aluno();
+		sala = new Sala();
 	}
 
 	public void cancelar() {
-		aluno = null;
+		sala = null;
 	}
 
 	public void editar() {
 		try {
-			aluno = sa.find(id);
+			sala = sa.find(id);
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		aluno = null;
+		sala = null;
 	}
 
 	public void excluir() {
@@ -108,6 +111,31 @@ public class ControleAluno {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		aluno = null;
+		sala = null;
+	}
+
+	public String getBooleanString(boolean s) {
+		return s ? "Sim" : "Não";
+	}
+
+	public String getStatusString(int s) {
+		String result;
+
+		switch(s){
+		case 1:
+			result = "Ativo";
+			break;
+		case 2:
+			result = "Em Manutenção";
+			break;
+		case 3:
+			result = "Desativado";
+			break;
+		default:
+			result = "";
+			break;
+		}
+
+		return result;
 	}
 }
