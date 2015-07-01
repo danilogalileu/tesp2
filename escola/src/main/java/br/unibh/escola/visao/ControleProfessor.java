@@ -106,6 +106,7 @@ public class ControleProfessor {
 	public void excluir() {
 		try {
 			sa.delete(sa.find(id));
+			Professores = sa.findByName(nomeArg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

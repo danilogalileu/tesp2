@@ -1,4 +1,5 @@
 package br.unibh.escola.visao;
+
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -47,14 +48,11 @@ public class ControleAluno {
 	}
 
 	@PostConstruct
-	public void inicializaLista() {
-		log.info("Executando o MB de Aluno");
-		try {
-			alunoes = sa.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void inicializaLista() throws Exception {
+	log.info("Executando o MB de Aluno");
+	alunoes = sa.findAll();
 	}
+	
 
 	public void gravar() {
 		FacesMessage facesMsg;
@@ -105,6 +103,7 @@ public class ControleAluno {
 	public void excluir() {
 		try {
 			sa.delete(sa.find(id));
+			alunoes = sa.findByName(nomeArg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

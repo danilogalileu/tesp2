@@ -8,6 +8,8 @@
 	xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
+	<h:outputScript library="js" name="jquery.maskedinput.min.js"
+		target="head" />
 	<title>Java EE 6 Starter Application</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
@@ -22,21 +24,49 @@
 						onclick="document.location.href='aluno.jsf'" />
 					<rich:menuItem label="Professor"
 						onclick="document.location.href='professor.jsf'" />
-						<rich:menuItem label="Sala"
+					<rich:menuItem label="Sala"
 						onclick="document.location.href='sala.jsf'" />
-						<rich:menuItem label="Disciplina"
+					<rich:menuItem label="Disciplina"
 						onclick="document.location.href='disciplina.jsf'" />
 				</rich:dropDownMenu>
+				<h:form>
+					<rich:dropDownMenu label="Relatórios">
+						<rich:menuItem label="Sala (Visualizar)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioSala','inline')}"
+							icon="/resources/images/view.gif" />
+						<rich:menuItem label="Sala (download)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioSala','attach')}"
+							icon="/resources/images/save.gif" />
+						<rich:menuItem label="Alunos (Visualizar)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioAlunos','inline')}"
+							icon="/resources/images/view.gif" />
+						<rich:menuItem label="Alunos (download)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioAlunos','attach')}"
+							icon="/resources/images/save.gif" />
+						<rich:menuItem label="Professor (Visualizar)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioProfessor','inline')}"
+							icon="/resources/images/view.gif" />
+						<rich:menuItem label="Professor (download)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioProfessor','attach')}"
+							icon="/resources/images/save.gif" />
+						<rich:menuItem label="Disciplina (Visualizar)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioDisciplinas','inline')}"
+							icon="/resources/images/view.gif" />
+						<rich:menuItem label="Disciplina (download)"
+							actionListener="#{relatoriosmb.geraRelatorio('RelatorioDisciplinas','attach')}"
+							icon="/resources/images/save.gif" />
+					</rich:dropDownMenu>
+				</h:form>
 			</rich:toolbar>
-			
+
 			<ui:insert name="content">
-                    
+                    [Template content will be inserted here]
                 </ui:insert>
 		</div>
 		<div id="footer">
-			<h:graphicImage value="/resources/gfx/logo.png" alt="Weld logo"/>
+			<h:graphicImage value="/resources/gfx/logo.png" alt="Weld logo" />
 			<p>
-				Copyright by Danilo Moraes © 2015<br />
+				Copyright by Danilo Moraes - 2015<br />
 			</p>
 		</div>
 	</div>

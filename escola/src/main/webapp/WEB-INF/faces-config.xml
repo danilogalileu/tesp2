@@ -24,5 +24,8 @@
 		<converter-class>br.unibh.escola.visao.ConversorAluno</converter-class>
 	</converter>
 
+	<factory>
+		<exception-handler-factory>br.unibh.escola.visao.CustomExceptionHandlerFactory</exception-handler-factory>
+	</factory>
 
 </faces-config>

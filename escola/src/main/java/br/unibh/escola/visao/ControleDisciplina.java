@@ -179,6 +179,7 @@ public class ControleDisciplina {
 	public void excluir() {
 		try {
 			sd.delete(sd.find(id));
+			disciplinas = sd.findByNomeECurso(nomeArg, cursoArg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

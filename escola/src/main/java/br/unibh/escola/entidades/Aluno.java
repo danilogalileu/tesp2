@@ -34,8 +34,16 @@ public class Aluno extends Pessoa {
 	private Date dataAniversario;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "ALUNO_DISCIPLINA", joinColumns = @JoinColumn(name = "ID_ALUNO"), inverseJoinColumns = @JoinColumn(name = "ID_DISCIPLINA"))
+	@JoinTable(name = "aluno_disciplina", joinColumns = @JoinColumn(name = "id_aluno"), inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
 	private List<Disciplina> disciplinas;
+
+	/*
+	 * @ManyToMany(fetch = FetchType.LAZY, mappedBy="aluno")
+	 * 
+	 * @JoinTable(name = "aluno_disciplina", joinColumns = @JoinColumn(name =
+	 * "aluno_id"), inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
+	 * private Set<Disciplina> disciplinas = new HashSet<Disciplina>();
+	 */
 
 	public Aluno() {
 	}

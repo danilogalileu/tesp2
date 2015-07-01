@@ -108,6 +108,7 @@ public class ControleSala {
 	public void excluir() {
 		try {
 			sa.delete(sa.find(id));
+			salas = sa.findByName(capacidadeArg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
